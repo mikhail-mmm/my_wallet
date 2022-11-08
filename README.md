@@ -4,12 +4,12 @@ Web service for personal finance accounting.
 
 ## TODO
 
-- Project wireframe
-- Base models (User, Wallet, Transaction)
+- [DONE] Project wireframe
+- [DONE] Base models (User, Wallet, Transaction)
 - Auth-related flows
-  - Registration
+  - [DONE] Registration
   - Authentication
-  - Email verification
+  - [DONE] Email verification
   - User preferences
 - Wallet/Transaction CRUD
 - Wallet access management

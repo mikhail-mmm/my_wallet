@@ -2,3 +2,7 @@ flask==2.2.2
 sqlalchemy==1.4.43
 alembic==1.8.1
 psycopg2-binary==2.9.5
+wtforms==3.0.1
+flask-login==0.6.2
+flask-mailgun==0.4
+twilio==7.15.1

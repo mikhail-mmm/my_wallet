@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Wallet – Registration</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    </head>
+<body>
+<div class="pure-g">
+    <div class="pure-u-2-5"></div>
+    <div class="pure-u-1-5">
+        <form class="pure-form pure-form-stacked" method="POST">
+            <fieldset>
+                <legend>Verification</legend>
+                {% for error in form.email_code.errors %}
+                    {{ error }}
+                {% endfor %}
+                {{ form.email_code.label }}
+                {{ form.email_code }}
+
+                {% for error in form.sms_code.errors %}
+                    {{ error }}
+                {% endfor %}
+                {{ form.sms_code.label }}
+                {{ form.sms_code }}
+                <button type="submit" class="pure-button pure-button-primary">Sign up</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+    </body>
+</html>
