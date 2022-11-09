@@ -1,38 +1,10 @@
-<!doctype html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Wallet – Registration</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
-    </head>
-<body>
-<div class="pure-g">
-    <div class="pure-u-2-5"></div>
-    <div class="pure-u-1-5">
-        <form class="pure-form pure-form-stacked" method="POST">
-            <fieldset>
-                <legend>Sign up</legend>
-                {% for error in form.email.errors %}
-                    {{ error }}
-                {% endfor %}
-                {{ form.email.label }}
-                {{ form.email }}
+{% extends 'form.html' %}
 
-                {{ form.mobile.label }}
-                {{ form.mobile }}
 
-                {{ form.first_name.label }}
-                {{ form.first_name }}
+{% block title %}My Wallet – Registration{% endblock %}
 
-                {{ form.last_name.label }}
-                {{ form.last_name }}
-                <button type="submit" class="pure-button pure-button-primary">Sign up</button>
-            </fieldset>
-        </form>
-    </div>
-</div>
-    </body>
-</html>
+
+{% block form_title %}Sign up{% endblock %}
+
+
+{% block submit_text %}Sign up{% endblock %}
