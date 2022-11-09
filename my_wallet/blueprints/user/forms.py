@@ -2,6 +2,7 @@ from flask import current_app, session
 from sqlalchemy import exists
 from wtforms import Form, StringField, EmailField
 from wtforms.validators import InputRequired
+from wtforms_alchemy import ModelForm
 
 from my_wallet.blueprints.user.models.user import User
 
@@ -59,3 +60,9 @@ class LoginVerifyForm(Form):
             self.email_code.errors = "Wrong code",
             return False
         return super().validate(extra_validators)
+
+
+class UserSettingsForm(ModelForm):
+    class Meta:
+        model = User
+        only = ['first_name', 'last_name']

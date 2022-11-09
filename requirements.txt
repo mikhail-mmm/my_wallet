@@ -6,3 +6,4 @@ wtforms==3.0.1
 flask-login==0.6.2
 flask-mailgun==0.4
 twilio==7.15.1
+wtforms-alchemy==0.18.0

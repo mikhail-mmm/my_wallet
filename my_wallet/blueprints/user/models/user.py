@@ -7,8 +7,8 @@ class User(Base):
     __tablename__ = "user"
 
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(30))
-    last_name = Column(String(30))
+    first_name = Column(String(30), info={"label": "First name"})
+    last_name = Column(String(30), info={"label": "Last name"})
     email = Column(String(30))
     mobile = Column(String(30))
 

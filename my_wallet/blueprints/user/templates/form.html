@@ -14,8 +14,10 @@
                     {{ field.label }}
                     {{ field }}
                 {% endfor %}
+                {% block extra_form_data %}{% endblock %}
                 <button type="submit" class="pure-button pure-button-primary">{% block submit_text %}{% endblock %}</button>
             </fieldset>
         </form>
+        {% block post_form %}{% endblock %}
     </div>
 {% endblock %}

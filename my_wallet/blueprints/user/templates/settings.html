@@ -1,0 +1,26 @@
+{% extends 'form.html' %}
+
+
+{% block title %}My Wallet – Settings{% endblock %}
+
+
+{% block form_title %}Profile{% endblock %}
+
+
+{% block extra_form_data %}
+<div class="extra_form_item">
+    Email: {{ current_user.email }}
+    <a href="#" style="float: right">change</a>
+</div>
+<div class="extra_form_item">
+    Mobile: {{ current_user.mobile }}
+    <a href="#" style="float: right">change</a>
+</div>
+
+{% endblock %}
+
+{% block submit_text %}Save{% endblock %}
+
+{% block post_form %}
+    <a href="{{ url_for('.logout')}}">Logout</a>
+{% endblock %}
