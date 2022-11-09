@@ -5,10 +5,10 @@ Web service for personal finance accounting.
 ## TODO
 
 - [DONE] Project wireframe
-- [DONE] Base models (User, Wallet, Transaction)
+- Base models (User, Wallet, Transaction)
 - Auth-related flows
   - [DONE] Registration
-  - Authentication
+  - [DONE] Authentication
   - [DONE] Email verification
   - User preferences
 - Wallet/Transaction CRUD

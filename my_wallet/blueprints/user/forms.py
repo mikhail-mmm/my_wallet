@@ -41,3 +41,21 @@ class RegistrationStep2Form(Form):
         if not all_codes_are_ok:
             return False
         return super().validate(extra_validators)
+
+
+class LoginForm(Form):
+    email = EmailField('Email', [InputRequired()], render_kw={"placeholder": "Email"})
+
+
+class LoginVerifyForm(Form):
+    email_code = StringField("Email code", [InputRequired()], render_kw={"placeholder": "Email code"})
+
+    def validate(self, extra_validators=None):
+        if (
+            not session["user_id"]
+            or not session["email_code"]
+            or session["email_code"] != self.email_code.data
+        ):
+            self.email_code.errors = "Wrong code",
+            return False
+        return super().validate(extra_validators)
