@@ -6,11 +6,11 @@ Web service for personal finance accounting.
 
 - [DONE] Project wireframe
 - Base models (User, Wallet, Transaction)
-- Auth-related flows
+- [DONE] Auth-related flows
   - [DONE] Registration
   - [DONE] Authentication
   - [DONE] Email verification
-  - User preferences
+  - [DONE] User preferences
 - Wallet/Transaction CRUD
 - Wallet access management
 - Wallet statistics

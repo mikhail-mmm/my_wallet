@@ -7,6 +7,7 @@ from twilio.rest import Client
 
 from my_wallet.blueprints.user.blueprint import user_blueprint
 from my_wallet.blueprints.user.fetchers import fetch_user_by
+from my_wallet.blueprints.wallet.blueprint import wallet_blueprint
 from my_wallet.config import get_config
 from my_wallet.utils.config import get_connection_dsn
 
@@ -15,6 +16,7 @@ def compose_app() -> Flask:
     app = Flask(__name__)
     app.config.update(get_config())
     app.register_blueprint(user_blueprint, url_prefix="/user")
+    app.register_blueprint(wallet_blueprint, url_prefix="/wallet")
 
     app.engine = create_engine(get_connection_dsn(app.config), echo=True)
     app.sessionmaker = sessionmaker(app.engine)
