@@ -20,6 +20,7 @@ class Wallet(Base):
     title = Column(String(30))
     status = Column(Enum(WalletStatus))
     owned_by_user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+
     owner = relationship("user.User", back_populates="wallets")
     users_with_access = relationship("user.User", secondary=wallet_access_table)
 
