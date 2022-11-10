@@ -66,3 +66,37 @@ class UserSettingsForm(ModelForm):
     class Meta:
         model = User
         only = ['first_name', 'last_name']
+
+
+class EmailChangeForm(Form):
+    email = EmailField('Email', [InputRequired()], render_kw={"placeholder": "New email"})
+
+
+class EmailChangeVerifyForm(Form):
+    email_code = StringField("Email code", [InputRequired()], render_kw={"placeholder": "Email code"})
+
+    def validate(self, extra_validators=None):
+        if (
+            not session["email_change_code"]
+            or session["email_change_code"] != self.email_code.data
+        ):
+            self.email_code.errors = "Wrong code",
+            return False
+        return super().validate(extra_validators)
+
+
+class MobileChangeForm(Form):
+    mobile = StringField('Mobile phone', [InputRequired()], render_kw={"placeholder": "New mobile"})
+
+
+class MobileChangeVerifyForm(Form):
+    sms_code = StringField("SMS code", [InputRequired()], render_kw={"placeholder": "SMS code"})
+
+    def validate(self, extra_validators=None):
+        if (
+            not session["mobile_change_code"]
+            or session["mobile_change_code"] != self.sms_code.data
+        ):
+            self.sms_code.errors = "Wrong code",
+            return False
+        return super().validate(extra_validators)

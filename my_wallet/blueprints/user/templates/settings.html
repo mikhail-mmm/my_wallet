@@ -10,11 +10,11 @@
 {% block extra_form_data %}
 <div class="extra_form_item">
     Email: {{ current_user.email }}
-    <a href="#" style="float: right">change</a>
+    <a href="{{ url_for('.change_email')}}" style="float: right">change</a>
 </div>
 <div class="extra_form_item">
     Mobile: {{ current_user.mobile }}
-    <a href="#" style="float: right">change</a>
+    <a href="{{ url_for('.change_mobile')}}" style="float: right">change</a>
 </div>
 
 {% endblock %}

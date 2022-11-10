@@ -4,7 +4,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from my_wallet.blueprints.user.changers import create_user, update_user
 from my_wallet.blueprints.user.fetchers import fetch_user_by
 from my_wallet.blueprints.user.forms import RegistrationForm, RegistrationStep2Form, LoginForm, LoginVerifyForm, \
-    UserSettingsForm
+    UserSettingsForm, EmailChangeForm, EmailChangeVerifyForm, MobileChangeForm, MobileChangeVerifyForm
 from my_wallet.blueprints.user.services.verification import generate_email_code, generate_sms_code, \
     send_verification_email, send_verification_sms
 
@@ -84,3 +84,51 @@ def settings():
         flash("Saved")
         return redirect(url_for(".settings"))
     return render_template("settings.html", form=form)
+
+
+@login_required
+def change_email():
+    form = EmailChangeForm(request.form) if request.method == "POST" else EmailChangeForm()
+    if request.method == "POST" and form.validate():
+        session["email_change_code"] = generate_email_code()
+        session["new_email"] = form.email.data
+        send_verification_email(session["new_email"], code=session["email_change_code"])
+        return redirect(url_for(".verify_change_email"))
+    return render_template("change_email.html", form=form)
+
+
+@login_required
+def verify_change_email():
+    form = EmailChangeVerifyForm(request.form) if request.method == "POST" else EmailChangeVerifyForm()
+    if request.method == "POST" and form.validate():
+        update_user(
+            user_id=current_user.id,
+            email=session["new_email"],
+        )
+        flash(f"Email changed to {session['new_email']}")
+        return redirect(url_for(".settings"))
+    return render_template("verify_change_email.html", form=form)
+
+
+@login_required
+def change_mobile():
+    form = MobileChangeForm(request.form) if request.method == "POST" else MobileChangeForm()
+    if request.method == "POST" and form.validate():
+        session["mobile_change_code"] = generate_sms_code()
+        session["new_mobile"] = form.mobile.data
+        send_verification_sms(session["new_mobile"], code=session["mobile_change_code"])
+        return redirect(url_for(".verify_change_mobile"))
+    return render_template("change_mobile.html", form=form)
+
+
+@login_required
+def verify_change_mobile():
+    form = MobileChangeVerifyForm(request.form) if request.method == "POST" else MobileChangeVerifyForm()
+    if request.method == "POST" and form.validate():
+        update_user(
+            user_id=current_user.id,
+            mobile=session["new_mobile"],
+        )
+        flash(f"Mobile changed to {session['new_mobile']}")
+        return redirect(url_for(".settings"))
+    return render_template("verify_change_mobile.html", form=form)
