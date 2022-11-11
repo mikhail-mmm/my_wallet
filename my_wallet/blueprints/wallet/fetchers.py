@@ -14,4 +14,4 @@ def fetch_wallets_for(user: User) -> list[Wallet]:
             )
         )
     ).fetchall()
-    return wallets
+    return [w[0] for w in wallets]

@@ -11,3 +11,12 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+a.wallet {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    background-color: lightblue;
+    text-decoration: none;
+    color: black;
+}

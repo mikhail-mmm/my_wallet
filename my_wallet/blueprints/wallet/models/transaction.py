@@ -14,4 +14,4 @@ class Transaction(Base):
     currency = Column(String(length=10))
     description = Column(Text)
 
-    wallet = relationship("wallet.Wallet", back_populates="transactions")
+    wallet = relationship("Wallet")
