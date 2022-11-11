@@ -21,8 +21,8 @@ class Wallet(Base):
     status = Column(Enum(WalletStatus))
     owned_by_user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
 
-    owner = relationship("user.User", back_populates="wallets")
-    users_with_access = relationship("user.User", secondary=wallet_access_table)
+    owner = relationship("User")
+    users_with_access = relationship("User", secondary=wallet_access_table)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name} ({self.email})"

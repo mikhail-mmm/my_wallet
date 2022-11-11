@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_mailgun import Mailgun
 from twilio.rest import Client
 
@@ -18,8 +18,8 @@ def compose_app() -> Flask:
     app.register_blueprint(user_blueprint, url_prefix="/user")
     app.register_blueprint(wallet_blueprint, url_prefix="/wallet")
 
-    app.engine = create_engine(get_connection_dsn(app.config), echo=True)
-    app.sessionmaker = sessionmaker(app.engine)
+    app.engine = create_engine(get_connection_dsn(app.config), echo=True, query_cache_size=0)
+    app.session = scoped_session(sessionmaker(app.engine))
 
     app.login_manager = LoginManager()
     app.login_manager.init_app(app)

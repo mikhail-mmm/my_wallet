@@ -1,5 +1,7 @@
 from flask import Blueprint
 
+from my_wallet.blueprints.wallet.views import wallets_list
+
 
 def configure_routes(blueprint: Blueprint) -> None:
-    pass
+    blueprint.add_url_rule("/", view_func=wallets_list, methods=["GET"])
