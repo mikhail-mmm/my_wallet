@@ -5,6 +5,9 @@
     <div class="pure-u-1-5"></div>
     <div class="pure-u-3-5">
         <h2>{{ wallet.title }}</h2>
+
+    <a class="pure-button pure-button-primary" href="{{ url_for('.transaction_add', wallet_id=wallet.id)}}">Add transaction</a>
+
     <h3>Transactions</h3>
     <table class="pure-table">
         <thead>
@@ -19,7 +22,7 @@
             {% for transaction in transactions %}
                 <tr>
                     <td>{{ transaction.timestamp }}</td>
-                    <td>{{ transaction.amount}} {{ transaction.currency }}</td>
+                    <td>{{ transaction.amount }} {{ transaction.currency }}</td>
                     <td>{{ transaction.description }}</td>
                     <td>
                         <form method="post" action="{{ url_for('.transaction_delete', transaction_id=transaction.id)}}">

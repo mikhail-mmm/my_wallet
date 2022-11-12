@@ -1,9 +1,11 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 
-from my_wallet.blueprints.wallet.changers import delete
+from my_wallet.blueprints.wallet.changers import delete, create
 from my_wallet.blueprints.wallet.fetchers import fetch_wallets_for, get_wallet_by, fetch_transactions_for, \
     get_transaction_by
+from my_wallet.blueprints.wallet.forms import TransactionAddForm
+from my_wallet.blueprints.wallet.models import Transaction
 
 
 @login_required
@@ -30,3 +32,21 @@ def transaction_delete(transaction_id):
     else:
         flash("Permission error")
     return redirect(url_for(".wallet_detail", wallet_id=transaction.wallet_id))
+
+
+@login_required
+def transaction_add(wallet_id):
+    form = TransactionAddForm(request.form) if request.method == "POST" else TransactionAddForm()
+    if request.method == "POST" and form.validate():
+        create(
+            Transaction(
+                wallet_id=wallet_id,
+                timestamp=form.timestamp.data,
+                amount=form.amount.data,
+                currency=form.currency.data,
+                description=form.description.data,
+            ),
+        )
+        flash("Transaction created")
+        return redirect(url_for(".wallet_detail", wallet_id=wallet_id))
+    return render_template("transaction_add.html", form=form)
