@@ -29,3 +29,10 @@ def fetch_transactions_for(wallet_id: int) -> list[Transaction]:
         select(Transaction).where(Transaction.wallet_id == wallet_id)
     ).fetchall()
     return [w[0] for w in transactions]
+
+
+def get_transaction_by(transaction_id: int) -> Transaction | None:
+    transaction_row = current_app.session.execute(
+        select(Transaction).where(Transaction.id == transaction_id)
+    ).fetchone()
+    return transaction_row[0] if transaction_row else None

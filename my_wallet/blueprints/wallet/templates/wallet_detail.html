@@ -12,6 +12,7 @@
                 <th>billed at</th>
                 <th>amount</th>
                 <th>description</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,11 @@
                     <td>{{ transaction.timestamp }}</td>
                     <td>{{ transaction.amount}} {{ transaction.currency }}</td>
                     <td>{{ transaction.description }}</td>
+                    <td>
+                        <form method="post" action="{{ url_for('.transaction_delete', transaction_id=transaction.id)}}">
+                            <button type="submit" class="pure-button pure-button-primary">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
