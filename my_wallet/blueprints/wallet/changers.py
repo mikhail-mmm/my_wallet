@@ -4,5 +4,9 @@ from my_wallet.blueprints.wallet.models import Wallet
 
 
 def create_wallet(wallet: Wallet):
-    current_app.session.add(wallet)
+    return create(wallet)
+
+
+def create(model_obj) -> None:
+    current_app.session.add(model_obj)
     current_app.session.commit()

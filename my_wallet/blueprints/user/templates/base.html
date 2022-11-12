@@ -19,17 +19,21 @@
                 </ul>
             </div>
         {% endif %}
-    <div class="pure-u-2-5"></div>
-    <div class="pure-u-1-5">
+        <div class="pure-g">
+            <div class="pure-u-2-5"></div>
+            <div class="pure-u-1-5">
 
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="flash success">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-    </div>
-        {% block body %}{% endblock %}
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="flash success">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="pure-g">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
