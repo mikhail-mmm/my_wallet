@@ -4,6 +4,8 @@
 {% block body %}
     <div class="pure-u-2-5"></div>
     <div class="pure-u-1-5">
+        <a class="pure-button pure-button-primary" href="{{ url_for('.wallet_add')}}">Add wallet</a>
+
         {% for wallet in wallets %}
             <a href="{{ url_for('.wallet_detail', wallet_id=wallet.id) }}" class="wallet">{{ wallet.title }}</a>
         {% endfor %}

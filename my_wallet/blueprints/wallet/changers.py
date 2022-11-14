@@ -7,9 +7,10 @@ def create_wallet(wallet: Wallet):
     return create(wallet)
 
 
-def create(model_obj) -> None:
+def create(model_obj):
     current_app.session.add(model_obj)
     current_app.session.commit()
+    return model_obj
 
 
 def delete(model_obj) -> None:
