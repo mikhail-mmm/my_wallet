@@ -1,6 +1,21 @@
 {% extends 'form.html' %}
 
 
+{% block pre_form %}
+    <div style="margin-bottom: 20px">
+    <form class="pure-form"><legend>Users with access</legend></form>
+    {% for user in wallet.users_with_access %}
+        <div>
+            {{ user.first_name }} {{ user.last_name }}
+            <form action="{{ url_for('.wallet_access_remove', wallet_id=wallet.id, user_id=user.id) }}" method="post" style="display: inline-block">
+                <button type="submit" class="pure-button pure-button-primary">Remove access</button>
+            </form>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+
 {% block title %}My Wallet – Wallet access management{% endblock %}
 
 

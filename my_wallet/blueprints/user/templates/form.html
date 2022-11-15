@@ -4,6 +4,7 @@
 {% block body %}
     <div class="pure-u-2-5"></div>
     <div class="pure-u-1-5">
+        {% block pre_form %}{% endblock %}
         <form class="pure-form pure-form-stacked" method="POST">
             <fieldset>
                 <legend>{% block form_title %}{% endblock %}</legend>

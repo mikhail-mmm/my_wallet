@@ -86,9 +86,9 @@ def wallet_add():
 @login_required
 def wallet_access(wallet_id):
     form = WalletAddMemberForm(request.form) if request.method == "POST" else WalletAddMemberForm()
+    wallet = get_wallet_by(wallet_id=wallet_id)
     if request.method == "POST" and form.validate():
         user = fetch_user_by(email=form.email.data)
-        wallet = get_wallet_by(wallet_id=wallet_id)
         if user is None:
             flash(f"User with email {form.email.data} not found")
         elif wallet and user.id in {u.id for u in wallet.users_with_access}:
@@ -100,4 +100,22 @@ def wallet_access(wallet_id):
             update(wallet)
             flash("Permission granted")
         return redirect(url_for(".wallet_access", wallet_id=wallet_id))
-    return render_template("wallet_access.html", form=form)
+    return render_template("wallet_access.html", form=form, wallet=wallet)
+
+
+@login_required
+def wallet_access_remove(wallet_id, user_id):
+    wallet = get_wallet_by(wallet_id=wallet_id)
+    user = fetch_user_by(user_id=user_id)
+    http_response = redirect(url_for(".wallet_access", wallet_id=wallet_id))
+    if wallet is None:
+        flash("Wallet not found")
+    elif user is None:
+        flash("User not found")
+    elif user_id not in {u.id for u in wallet.users_with_access}:
+        flash("User has no access to the wallet")
+    else:
+        wallet.users_with_access.remove(user)
+        update(wallet)
+        flash("Permission removed")
+    return http_response
