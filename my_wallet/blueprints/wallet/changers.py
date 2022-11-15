@@ -7,6 +7,13 @@ def create_wallet(wallet: Wallet):
     return create(wallet)
 
 
+def update(model_obj):
+    assert model_obj.id
+    current_app.session.add(model_obj)
+    current_app.session.commit()
+    return model_obj
+
+
 def create(model_obj):
     current_app.session.add(model_obj)
     current_app.session.commit()

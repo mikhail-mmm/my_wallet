@@ -7,7 +7,9 @@
         <h2>{{ wallet.title }}</h2>
 
     <a class="pure-button pure-button-primary" href="{{ url_for('.transaction_add', wallet_id=wallet.id)}}">Add transaction</a>
-
+    <form action="{{ url_for('.wallet_delete', wallet_id=wallet.id) }}" method="post" style="margin-top: 5px">
+        <button type="submit" class="pure-button pure-button-primary">Delete wallet</button>
+    </form>
     <h3>Transactions</h3>
     <table class="pure-table">
         <thead>

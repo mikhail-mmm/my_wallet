@@ -11,7 +11,7 @@ Web service for personal finance accounting.
   - [DONE] Authentication
   - [DONE] Email verification
   - [DONE] User preferences
-- Wallet/Transaction CRUD
+- [DONE] Wallet/Transaction CRUD
 - Command manager
 - Make fish data command
 - Wallet access management

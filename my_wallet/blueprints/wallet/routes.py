@@ -1,13 +1,14 @@
 from flask import Blueprint
 
 from my_wallet.blueprints.wallet.views import wallets_list, wallet_detail, transaction_delete, transaction_add, \
-    wallet_add
+    wallet_add, wallet_delete
 
 
 def configure_routes(blueprint: Blueprint) -> None:
     blueprint.add_url_rule("/", view_func=wallets_list, methods=["GET"])
     blueprint.add_url_rule("/new", view_func=wallet_add, methods=["GET", "POST"])
     blueprint.add_url_rule("/<int:wallet_id>", view_func=wallet_detail, methods=["GET"])
+    blueprint.add_url_rule("/w/<int:wallet_id>/delete", view_func=wallet_delete, methods=["POST"])
 
     blueprint.add_url_rule("/<int:wallet_id>/transaction/add", view_func=transaction_add, methods=["GET", "POST"])
-    blueprint.add_url_rule("/<int:transaction_id>/delete", view_func=transaction_delete, methods=["POST"])
+    blueprint.add_url_rule("/t/<int:transaction_id>/delete", view_func=transaction_delete, methods=["POST"])
