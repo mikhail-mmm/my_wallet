@@ -1,11 +1,12 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 
+from my_wallet.blueprints.user.fetchers import fetch_user_by
 from my_wallet.blueprints.wallet.changers import delete, create, update
 from my_wallet.blueprints.wallet.enums import WalletStatus
 from my_wallet.blueprints.wallet.fetchers import fetch_wallets_for, get_wallet_by, fetch_transactions_for, \
     get_transaction_by
-from my_wallet.blueprints.wallet.forms import TransactionAddForm, WalletAddForm
+from my_wallet.blueprints.wallet.forms import TransactionAddForm, WalletAddForm, WalletAddMemberForm
 from my_wallet.blueprints.wallet.models import Transaction, Wallet
 
 
@@ -80,3 +81,23 @@ def wallet_add():
         flash("Wallet created")
         return redirect(url_for(".wallet_detail", wallet_id=wallet.id))
     return render_template("wallet_add.html", form=form)
+
+
+@login_required
+def wallet_access(wallet_id):
+    form = WalletAddMemberForm(request.form) if request.method == "POST" else WalletAddMemberForm()
+    if request.method == "POST" and form.validate():
+        user = fetch_user_by(email=form.email.data)
+        wallet = get_wallet_by(wallet_id=wallet_id)
+        if user is None:
+            flash(f"User with email {form.email.data} not found")
+        elif wallet and user.id in {u.id for u in wallet.users_with_access}:
+            flash(f"User with email {form.email.data} already has access to the wallet")
+        elif wallet and wallet.owned_by_user_id == user.id:
+            flash("Cant add owner as user with access")
+        else:
+            wallet.users_with_access.append(user)
+            update(wallet)
+            flash("Permission granted")
+        return redirect(url_for(".wallet_access", wallet_id=wallet_id))
+    return render_template("wallet_access.html", form=form)
