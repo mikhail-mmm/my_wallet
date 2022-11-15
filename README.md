@@ -14,8 +14,13 @@ Web service for personal finance accounting.
 - [DONE] Wallet/Transaction CRUD
 - [DONE] Command manager
 - [DONE] Make fish data command
-- Wallet access management
+- [DONE] Wallet access management
 - Wallet statistics
+  - Biggest expenses
+  - Expenses by weekday
+  - Expenses by week with avg value
+  - Expenses by description
+  - Weekly balance report
 - Wallet stat export
 - Weekly stat note to tg
 - Customer API with docs

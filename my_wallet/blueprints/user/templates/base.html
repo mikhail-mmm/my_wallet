@@ -14,6 +14,12 @@
             <div class="pure-menu pure-menu-horizontal" style="text-align: right">
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item">
+                        <a href="{{ url_for('wallet.wallets_list')}}" class="pure-menu-link">Wallets</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href="{{ url_for('statistics.statistics')}}" class="pure-menu-link">Statistics</a>
+                    </li>
+                    <li class="pure-menu-item">
                         <a href="{{ url_for('user.settings')}}" class="pure-menu-link">{{ current_user.email }}</a>
                     </li>
                 </ul>
