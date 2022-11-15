@@ -12,7 +12,7 @@ Web service for personal finance accounting.
   - [DONE] Email verification
   - [DONE] User preferences
 - [DONE] Wallet/Transaction CRUD
-- Command manager
+- [DONE] Command manager
 - Make fish data command
 - Wallet access management
 - Wallet statistics
