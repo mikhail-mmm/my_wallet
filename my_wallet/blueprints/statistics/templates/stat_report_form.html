@@ -1,0 +1,38 @@
+{% extends 'form.html' %}
+
+
+{% block wrapper_class_empty %}pure-u-1-5{% endblock %}
+
+{% block wrapper_class_container %}pure-u-3-5{% endblock %}
+
+{% block title %}My Wallet – Wallets reports{% endblock %}
+
+
+{% block form_title %}Report constructor{% endblock %}
+
+
+{% block submit_text %}Generate report{% endblock %}
+
+
+{% block post_form %}
+    {% if report_data %}
+        <table class="pure-table">
+            <thead>
+                <tr>
+                    {% for column in report_data.columns%}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in report_data.data %}
+                    <tr>
+                        {% for item in row %}
+                            <td>{{ item }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
