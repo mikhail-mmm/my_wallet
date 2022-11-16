@@ -15,12 +15,12 @@ Web service for personal finance accounting.
 - [DONE] Command manager
 - [DONE] Make fish data command
 - [DONE] Wallet access management
-- Wallet statistics
-  - Biggest expenses
-  - Expenses by weekday
-  - Expenses by week with avg value
-  - Expenses by description
-  - Weekly balance report
+- [DONE] Wallet statistics
+  - [DONE] Biggest expenses
+  - [DONE] Expenses by weekday
+  - [DONE] Expenses by week with avg value
+  - [DONE] Expenses by description
+  - [DONE] Weekly balance report
 - Wallet stat export
 - Weekly stat note to tg
 - Customer API with docs
