@@ -19,4 +19,6 @@ def get_config() -> Mapping[str, Any]:
         "TWILLIO_SID": os.environ.get("TWILLIO_SID"),
         "TWILLIO_AUTH_TOKEN": os.environ.get("TWILLIO_AUTH_TOKEN"),
         "TWILLIO_FROM_NUMBER": os.environ.get("TWILLIO_FROM_NUMBER"),
+
+        "TELEGRAM_BOT_TOKEN": os.environ.get("TELEGRAM_BOT_TOKEN"),
     }
