@@ -21,6 +21,6 @@ Web service for personal finance accounting.
   - [DONE] Expenses by week with avg value
   - [DONE] Expenses by description
   - [DONE] Weekly balance report
-- Wallet stat export
+- [DONE] Wallet stat export
 - Weekly stat note to tg
 - Customer API with docs
