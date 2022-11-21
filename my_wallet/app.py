@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_smorest import Api
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_mailgun import Mailgun
 from twilio.rest import Client
 
+from my_wallet.blueprints.api.blueprint import api_blueprint
 from my_wallet.blueprints.statistics.blueprint import statistics_blueprint
 from my_wallet.blueprints.user.blueprint import user_blueprint
 from my_wallet.blueprints.user.fetchers import fetch_user_by
@@ -29,6 +31,9 @@ def compose_app() -> Flask:
 
     app.mailgun = Mailgun()
     app.mailgun.init_app(app)
+
+    app.api = Api(app)
+    app.api.register_blueprint(api_blueprint)
 
     app.twillio_client = Client(app.config["TWILLIO_SID"], app.config["TWILLIO_AUTH_TOKEN"])
     return app

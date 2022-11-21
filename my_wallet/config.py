@@ -21,4 +21,11 @@ def get_config() -> Mapping[str, Any]:
         "TWILLIO_FROM_NUMBER": os.environ.get("TWILLIO_FROM_NUMBER"),
 
         "TELEGRAM_BOT_TOKEN": os.environ.get("TELEGRAM_BOT_TOKEN"),
+
+        "API_TITLE": "My Wallet API",
+        "API_VERSION": "v1",
+        "OPENAPI_VERSION": "3.0.2",
+        "OPENAPI_URL_PREFIX": "/docs/api",
+        "OPENAPI_SWAGGER_UI_PATH": "/swagger",
+        "OPENAPI_SWAGGER_UI_URL": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/",
     }

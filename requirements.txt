@@ -1,5 +1,6 @@
 flask==2.2.2
 sqlalchemy==1.4.43
+flask-sqlalchemy==2.5.1
 alembic==1.8.1
 psycopg2-binary==2.9.5
 wtforms==3.0.1
@@ -9,3 +10,5 @@ twilio==7.15.1
 wtforms-alchemy==0.18.0
 XlsxWriter==3.0.3
 reportlab==3.6.12
+flask-smorest==0.40.0
+marshmallow==3.19.0
