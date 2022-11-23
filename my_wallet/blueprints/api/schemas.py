@@ -6,8 +6,8 @@ class WalletSchema(Schema):
     id = Int(dump_only=True)
     title = String()
     status = String()
-    owned_by_user_id = Int()
-    users_with_access = List(Int())
+    owned_by_user_id = Int(dump_only=True)
+    users_ids_with_access = List(Int(), dump_only=True, attribute="users_ids_with_access")
 
 
 class TransactionSchema(Schema):

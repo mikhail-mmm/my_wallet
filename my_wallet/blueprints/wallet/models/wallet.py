@@ -26,3 +26,7 @@ class Wallet(Base):
 
     def __str__(self) -> str:
         return f"{self.title}"
+
+    @property
+    def users_ids_with_access(self) -> list[int]:
+        return [u.id for u in self.users_with_access]
