@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from my_wallet.blueprints.user.views import register, verify, main, login, login_verify, logout, settings, change_email, \
+from my_wallet.blueprints.user.views import register, verify, login, login_verify, logout, settings, change_email, \
     verify_change_email, change_mobile, verify_change_mobile
 
 
@@ -18,5 +18,3 @@ def configure_routes(blueprint: Blueprint) -> None:
     blueprint.add_url_rule("/mobile/change/verify/", view_func=verify_change_mobile, methods=["GET", "POST"])
 
     blueprint.add_url_rule("/settings/", view_func=settings, methods=["GET", "POST"])
-
-    blueprint.add_url_rule("/", view_func=main, methods=["GET"])

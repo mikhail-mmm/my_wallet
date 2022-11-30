@@ -14,13 +14,12 @@ class RegistrationForm(Form):
     mobile = StringField('Mobile phone', [InputRequired()], render_kw={"placeholder": "Mobile"})
 
     def validate(self, extra_validators=None):
-        with current_app.sessionmaker.begin() as session:
-            is_duplicates_exists = session.query(
-                exists(User).where(
-                    User.email == self.email.data,
-                    User.mobile == self.mobile.data
-                ),
-            ).scalar()
+        is_duplicates_exists = current_app.session.query(
+            exists(User).where(
+                User.email == self.email.data,
+                User.mobile == self.mobile.data
+            ),
+        ).scalar()
         if is_duplicates_exists:
             self.email.errors = "Please use another email/mobile pair",
             return False

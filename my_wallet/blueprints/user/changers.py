@@ -7,14 +7,15 @@ from my_wallet.blueprints.user.models.user import User
 
 
 def create_user(email: str, mobile: str, first_name: str, last_name: str) -> User:
-    return current_app.session.execute(
-        insert(User).values([{
-            "email": email,
-            "mobile": mobile,
-            "first_name": first_name,
-            "last_name": last_name,
-        }]).returning(User)
-    ).fetchone()
+    user = User(
+        email=email,
+        mobile=mobile,
+        first_name=first_name,
+        last_name=last_name,
+    )
+    current_app.session.add(user)
+    current_app.session.commit()
+    return user
 
 
 def update_user(user_id: int, **kwargs_to_update: Any) -> None:

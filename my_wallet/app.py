@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_smorest import Api
@@ -13,6 +15,9 @@ from my_wallet.blueprints.user.fetchers import fetch_user_by
 from my_wallet.blueprints.wallet.blueprint import wallet_blueprint
 from my_wallet.config import get_config
 from my_wallet.utils.config import get_connection_dsn
+
+
+logging.basicConfig(level=logging.INFO)
 
 
 def compose_app() -> Flask:

@@ -1,3 +1,5 @@
+import logging
+
 from flask import render_template, request, session, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -7,6 +9,9 @@ from my_wallet.blueprints.user.forms import RegistrationForm, RegistrationStep2F
     UserSettingsForm, EmailChangeForm, EmailChangeVerifyForm, MobileChangeForm, MobileChangeVerifyForm
 from my_wallet.blueprints.user.services.verification import generate_email_code, generate_sms_code, \
     send_verification_email, send_verification_sms
+
+
+logger = logging.getLogger(__name__)
 
 
 def register():
@@ -21,6 +26,7 @@ def register():
         session["user_id"] = user.id
         session["email_code"] = generate_email_code()
         session["sms_code"] = generate_sms_code()
+        logger.info(f"Verification codes: sms {session['sms_code']}, email {session['email_code']}")
         send_verification_email(user.email, code=session["email_code"])
         send_verification_sms(user.mobile, code=session["sms_code"])
         return redirect(url_for(".verify"))
@@ -32,7 +38,7 @@ def verify():
     if request.method == "POST" and form.validate():
         user = fetch_user_by(user_id=session["user_id"])
         login_user(user)
-        return redirect(url_for(".main"))
+        return redirect(url_for(".settings"))
     return render_template("register_step2.html", form=form)
 
 
@@ -53,19 +59,13 @@ def login_verify():
     if request.method == "POST" and form.validate():
         user = fetch_user_by(user_id=session["user_id"])
         login_user(user)
-        return redirect(url_for(".main"))
+        return redirect(url_for(".settings"))
     return render_template("login_step2.html", form=form)
 
 
 def logout():
     logout_user()
     return redirect(url_for(".login"))
-
-
-@login_required
-def main():
-    user_name = f"{current_user.first_name} {current_user.last_name}"
-    return render_template("main.html", name=user_name)
 
 
 @login_required
