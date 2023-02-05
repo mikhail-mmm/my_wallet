@@ -2,6 +2,7 @@ from wtforms import Form, DateField, SelectMultipleField, SelectField
 from wtforms.validators import InputRequired
 
 from my_wallet.blueprints.statistics.enums import StatReportType, ReportDisplayFormat
+from my_wallet.blueprints.statistics.utils import is_report_range_valid
 
 
 class StatReportForm(Form):
@@ -17,7 +18,7 @@ class StatReportForm(Form):
     )
 
     def validate(self, extra_validators=None):
-        if self.date_to.data < self.date_from.data:
+        if is_report_range_valid(self.date_from.data, self.date_to.data):
             self.date_to.errors = f"Should be after {self.date_from.data}",
             return False
         return super().validate(extra_validators)
