@@ -8,7 +8,7 @@ def get_connection_dsn(config: Mapping[str, Any]) -> str:
     )
 
 
-if __name__ == '__main__':
+def test_get_connection_dsn():
     config = {
         'POSTGRES_USER': 'user',
         'POSTGRES_PASSWORD': 'password',
